@@ -1,0 +1,63 @@
+<div class="container">
+    <h3 class="heading">Create New Policy</h3>
+    <form [formGroup]="newPolicyForm" novalidate (ngSubmit)="onSubmit(newPolicyForm)">
+        <div class="form-group">
+            <label>
+                Name:
+                <input name="name" class="form-control" type="text" formControlName="name">
+                <div *ngIf="submitted" class="alert alert-danger" [hidden]=" newPolicyForm.controls.name.valid">Name is
+                    required</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Date of birth:
+                <input name="dob" type="date" class="form-control" formControlName="dob">
+                <div *ngIf="submitted" class="alert alert-danger" [hidden]="newPolicyForm.controls.dob.valid">
+                    Date-of-birth is required</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Email:
+                <input name="email" type="email" formControlName="email" class="form-control">
+                <div *ngIf="submitted" class="alert alert-danger" [hidden]="newPolicyForm.controls.email.valid">Email is
+                    required</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Gender:
+                <select formControlName="gender" name="gender" id="gender" class="form-control">
+                    <option>Female</option>
+                    <option>Male</option>
+                </select>
+                <div *ngIf="submitted" class="alert alert-danger" [hidden]="newPolicyForm.controls.gender.valid">Gender
+                    is required</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Car Make:
+                <select formControlName="carMake" name="carMake" id="carMake" class="form-control">
+                    <option>VW</option>
+                    <option>BMW</option>
+                    <option>Mercedes Benz</option>
+                </select>
+                <div *ngIf="submitted" class="alert alert-danger" [hidden]="newPolicyForm.controls.carMake.valid">Car
+                    Make is required</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Car Price:
+                <input name="carPrice" class="form-control" type="number" formControlName="carPrice">
+                <div *ngIf="submitted" class="alert alert-danger" [hidden]="newPolicyForm.controls.carPrice.valid">Car
+                    Price is required</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

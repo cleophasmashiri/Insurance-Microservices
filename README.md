@@ -2,11 +2,11 @@
 
 ## Iteration 1: Customer-Centred-Design with Camunda BPM. 
 (a) Strategic alignment with KPI and SLA.
-(b) Business Processing Modeling with Camunda modeller.
+(b) Business Processing Modeling with Camunda modeler.
 (c) Simulated runs.
 
 ## Iteration 2: Microservices
-(a) Create and interate the following: Policy, Customer, Risk, Auth services.
+(a) Create the following: Policy, Customer, Risk, Auth services.
 
 ## Iteration 3: Dockerise,Jenkinise
 (a) Dockerise dev.

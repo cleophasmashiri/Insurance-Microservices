@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="027f028e-f0a7-4e86-bd1d-8af4a192d78e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_yaml_2_9_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__com_github_StephenOTT_camunda_prometheus_process_engine_plugin_1_7_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__io_prometheus_simpleclient_0_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__io_prometheus_simpleclient_common_0_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__io_prometheus_simpleclient_httpserver_0_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__org_apache_httpcomponents_fluent_hc_4_5_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__org_camunda_template_engines_camunda_template_engines_freemarker_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/.idea/libraries/Maven__org_freemarker_freemarker_2_3_28.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/docker-build.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/EmailDelegate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/GeneratePolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/model/InsurancePolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/main/resources/static/forms/assessQuote.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/main/resources/static/forms/createQuote.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/main/resources/static/forms/customerAcceptRejectQuote.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insurance-bpm/src/test/java/com/demo/policy/InsurancePolicyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/GenerateClearanceDocuments.java" />
+        <option value="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/ProcessInvoicePayment.java" />
+        <option value="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/CreateQuote.java" />
+        <option value="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/service/ContractServiceImpl.java" />
+        <option value="$PROJECT_DIR$/insurance-bpm/src/test/java/com/demo/contracting/VehicleClearanceProcessTest.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/insurance-microservices-with-dotnetcore-bpm.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/angular-6-registration-login-example/.idea/angular-6-registration-login-example.iml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="960" />
+    <option name="y" value="28" />
+    <option name="width" value="950" />
+    <option name="height" value="1052" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="027f028e-f0a7-4e86-bd1d-8af4a192d78e" name="Default Changelist" comment="" />
+      <created>1570979325304</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570979325304</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="28" width="1920" height="1052" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27155173" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3295325" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33295324" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Maven" order="5" />
+      <window_info anchor="right" id="BPMNPalette" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/ActivateContract.java" />
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/EmailInvoiceToCustomer.java" />
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/GenerateClearanceDocuments.java" />
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/ProcessInvoicePayment.java" />
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/GenerateInvoice.java" />
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/ValidateApplication.java" />
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/resources/application.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/EmailDelegate.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/service/ContractServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/test/java/com/demo/contracting/VehicleClearanceProcessTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="46" column="35" selection-start-line="44" selection-start-column="83" selection-end-line="46" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/java/com/demo/delegates/CreateQuote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insurance-bpm/src/main/resources/static/forms/createQuote.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="71" column="14" selection-start-line="71" selection-start-column="14" selection-end-line="74" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

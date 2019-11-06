@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1jtep75" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+  <bpmn:collaboration id="submit_quote">
+    <bpmn:participant id="Participant_07rwh4w" name="Policy Process" processRef="policyprocess" />
+  </bpmn:collaboration>
+  <bpmn:process id="policyprocess" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1s6ubp3">
+      <bpmn:lane id="Lane_1n4otsj" name="Customer">
+        <bpmn:flowNodeRef>submit_new_quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0ny3xsn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>customer_accept_reject_quote_gateway</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>customer_reject_email</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>generate_policy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1dwgtz4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1rb4g2z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>remind_email_sent_customer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>create_quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>customer_accept_reject_quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_0sjweas</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1ysd3xp" name="Consultant">
+        <bpmn:flowNodeRef>assess_quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>approved_quote_gateway</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>approved_quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>send_consultant_rejected_email</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1jvd7t9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>reminder_email_sent_consultant</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1hrdxzp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>remind_consultant</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="submit_new_quote" name="Submit new quote" camunda:formKey="embedded:app:forms/createQuote.html">
+      <bpmn:outgoing>SequenceFlow_1fl6qcx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fl6qcx" sourceRef="submit_new_quote" targetRef="create_quote" />
+    <bpmn:sequenceFlow id="SequenceFlow_1t61rbl" sourceRef="create_quote" targetRef="assess_quote" />
+    <bpmn:userTask id="assess_quote" name="Assess Quote" camunda:formKey="embedded:app:forms/assessQuote.html" camunda:candidateGroups="consultant">
+      <bpmn:incoming>SequenceFlow_1t61rbl</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06xcqoa</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="approved_quote_gateway">
+      <bpmn:incoming>SequenceFlow_06xcqoa</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1lg06k1</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1gbjlji</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_06xcqoa" sourceRef="assess_quote" targetRef="approved_quote_gateway" />
+    <bpmn:sequenceFlow id="SequenceFlow_1lg06k1" name="Approved Quote" sourceRef="approved_quote_gateway" targetRef="approved_quote">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{approveQuote}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sendTask id="approved_quote" name="Send Approved Quote email" camunda:delegateExpression="#{emailDelegate}">
+      <bpmn:incoming>SequenceFlow_1lg06k1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0yknbh6</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1gbjlji" name="Reject Quote" sourceRef="approved_quote_gateway" targetRef="send_consultant_rejected_email">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!approveQuote}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_1jvd7t9">
+      <bpmn:incoming>SequenceFlow_0jnxbzu</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0jnxbzu" sourceRef="send_consultant_rejected_email" targetRef="EndEvent_1jvd7t9" />
+    <bpmn:sequenceFlow id="SequenceFlow_0yknbh6" sourceRef="approved_quote" targetRef="customer_accept_reject_quote" />
+    <bpmn:sequenceFlow id="SequenceFlow_1r41ldo" sourceRef="customer_accept_reject_quote" targetRef="customer_accept_reject_quote_gateway" />
+    <bpmn:sequenceFlow id="SequenceFlow_18laixa" sourceRef="customer_accept_reject_quote_gateway" targetRef="customer_reject_email">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!customerAcceptQuote}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_0ny3xsn">
+      <bpmn:incoming>SequenceFlow_1q2agk4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1q2agk4" sourceRef="customer_reject_email" targetRef="EndEvent_0ny3xsn" />
+    <bpmn:exclusiveGateway id="customer_accept_reject_quote_gateway" name="Accept or reject">
+      <bpmn:incoming>SequenceFlow_1r41ldo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18laixa</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_17zl0hp</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="customer_reject_email" name="Customer reject email" camunda:delegateExpression="#{emailDelegate}">
+      <bpmn:incoming>SequenceFlow_18laixa</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1q2agk4</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_17zl0hp" sourceRef="customer_accept_reject_quote_gateway" targetRef="generate_policy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{customerAcceptQuote}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="generate_policy" name="Generate policy" camunda:delegateExpression="#{generatePolicy}">
+      <bpmn:incoming>SequenceFlow_17zl0hp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1xmfps0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_1dwgtz4">
+      <bpmn:incoming>SequenceFlow_1xmfps0</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1xmfps0" sourceRef="generate_policy" targetRef="EndEvent_1dwgtz4" />
+    <bpmn:boundaryEvent id="remind_consultant" name="Remind consultant" cancelActivity="false" attachedToRef="assess_quote">
+      <bpmn:outgoing>SequenceFlow_0mbl7e5</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P1D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0mbl7e5" sourceRef="remind_consultant" targetRef="reminder_email_sent_consultant" />
+    <bpmn:sendTask id="reminder_email_sent_consultant" name="Send reminder mail" camunda:delegateExpression="#{emailDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="consultantReminderEmailSubject">Assess Quote Reminder</camunda:inputParameter>
+          <camunda:inputParameter name="consultantReminderEmailBody">
+            <camunda:script scriptFormat="freemarker">Dear: Consultants
+Quote #: {policy.policyNumber}.
+
+A friendly reminder to assess the following policy quote {policy.policyNumber}
+
+Kind regards,
+Camundanzia.</camunda:script>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0mbl7e5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0po4qwz</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0po4qwz" sourceRef="reminder_email_sent_consultant" targetRef="EndEvent_1hrdxzp" />
+    <bpmn:endEvent id="EndEvent_1hrdxzp">
+      <bpmn:incoming>SequenceFlow_0po4qwz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="send_consultant_rejected_email" name="Send consultant rejected email" camunda:delegateExpression="#{emailDelegate}">
+      <bpmn:incoming>SequenceFlow_1gbjlji</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0jnxbzu</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0b91hwi" sourceRef="BoundaryEvent_0sjweas" targetRef="remind_email_sent_customer" />
+    <bpmn:endEvent id="EndEvent_1rb4g2z">
+      <bpmn:incoming>SequenceFlow_0l99c02</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0l99c02" sourceRef="remind_email_sent_customer" targetRef="EndEvent_1rb4g2z" />
+    <bpmn:sendTask id="remind_email_sent_customer" name="Send reminder email" camunda:delegateExpression="#{emailDelegate}">
+      <bpmn:incoming>SequenceFlow_0b91hwi</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0l99c02</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="create_quote" name="Create quote" camunda:delegateExpression="#{createQuote}">
+      <bpmn:incoming>SequenceFlow_1fl6qcx</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1t61rbl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="customer_accept_reject_quote" name="Customer accept/reject quote" camunda:formKey="embedded:app:forms/customerAcceptRejectQuote.html" camunda:candidateGroups="customer">
+      <bpmn:incoming>SequenceFlow_0yknbh6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1r41ldo</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_0sjweas" name="Remind customer" cancelActivity="false" attachedToRef="customer_accept_reject_quote">
+      <bpmn:outgoing>SequenceFlow_0b91hwi</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P1D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="submit_quote">
+      <bpmndi:BPMNShape id="Participant_07rwh4w_di" bpmnElement="Participant_07rwh4w">
+        <dc:Bounds x="123" y="-51" width="1206" height="587" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="submit_new_quote">
+        <dc:Bounds x="257" y="123" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="232" y="166" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1n4otsj_di" bpmnElement="Lane_1n4otsj">
+        <dc:Bounds x="153" y="-51" width="1176" height="311" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1ysd3xp_di" bpmnElement="Lane_1ysd3xp">
+        <dc:Bounds x="153" y="260" width="1176" height="276" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fl6qcx_di" bpmnElement="SequenceFlow_1fl6qcx">
+        <di:waypoint x="293" y="141" />
+        <di:waypoint x="410" y="141" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1aw83z8_di" bpmnElement="create_quote">
+        <dc:Bounds x="410" y="101" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1t61rbl_di" bpmnElement="SequenceFlow_1t61rbl">
+        <di:waypoint x="510" y="141" />
+        <di:waypoint x="543" y="141" />
+        <di:waypoint x="543" y="318" />
+        <di:waypoint x="575" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0pu2qsp_di" bpmnElement="assess_quote">
+        <dc:Bounds x="575" y="278" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1sa8s3i_di" bpmnElement="approved_quote_gateway" isMarkerVisible="true">
+        <dc:Bounds x="740" y="293" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_06xcqoa_di" bpmnElement="SequenceFlow_06xcqoa">
+        <di:waypoint x="675" y="318" />
+        <di:waypoint x="740" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1lg06k1_di" bpmnElement="SequenceFlow_1lg06k1">
+        <di:waypoint x="790" y="318" />
+        <di:waypoint x="847" y="318" />
+        <di:waypoint x="847" y="326" />
+        <di:waypoint x="904" y="326" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="807" y="299" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_0wy2yvy_di" bpmnElement="approved_quote">
+        <dc:Bounds x="904" y="286" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1gbjlji_di" bpmnElement="SequenceFlow_1gbjlji">
+        <di:waypoint x="765" y="343" />
+        <di:waypoint x="765" y="436" />
+        <di:waypoint x="904" y="436" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="778" y="392" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_0drvrl1_di" bpmnElement="send_consultant_rejected_email">
+        <dc:Bounds x="904" y="396" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1jvd7t9_di" bpmnElement="EndEvent_1jvd7t9">
+        <dc:Bounds x="1118" y="418" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0jnxbzu_di" bpmnElement="SequenceFlow_0jnxbzu">
+        <di:waypoint x="1004" y="436" />
+        <di:waypoint x="1118" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0yknbh6_di" bpmnElement="SequenceFlow_0yknbh6">
+        <di:waypoint x="954" y="286" />
+        <di:waypoint x="954" y="245" />
+        <di:waypoint x="953" y="245" />
+        <di:waypoint x="953" y="203" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_17u2d23_di" bpmnElement="customer_accept_reject_quote">
+        <dc:Bounds x="903" y="123" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0ay40m4_di" bpmnElement="customer_accept_reject_quote_gateway" isMarkerVisible="true">
+        <dc:Bounds x="1054" y="133" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1040" y="109" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1r41ldo_di" bpmnElement="SequenceFlow_1r41ldo">
+        <di:waypoint x="1003" y="163" />
+        <di:waypoint x="1029" y="163" />
+        <di:waypoint x="1029" y="158" />
+        <di:waypoint x="1054" y="158" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_18laixa_di" bpmnElement="SequenceFlow_18laixa">
+        <di:waypoint x="1104" y="158" />
+        <di:waypoint x="1121" y="158" />
+        <di:waypoint x="1121" y="116" />
+        <di:waypoint x="1138" y="116" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0ny3xsn_di" bpmnElement="EndEvent_0ny3xsn">
+        <dc:Bounds x="1272" y="98" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1q2agk4_di" bpmnElement="SequenceFlow_1q2agk4">
+        <di:waypoint x="1238" y="116" />
+        <di:waypoint x="1272" y="116" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_09t5d6b_di" bpmnElement="customer_reject_email">
+        <dc:Bounds x="1138" y="76" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17zl0hp_di" bpmnElement="SequenceFlow_17zl0hp">
+        <di:waypoint x="1079" y="183" />
+        <di:waypoint x="1079" y="216" />
+        <di:waypoint x="1138" y="216" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_05ehf8j_di" bpmnElement="generate_policy">
+        <dc:Bounds x="1138" y="176" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1dwgtz4_di" bpmnElement="EndEvent_1dwgtz4">
+        <dc:Bounds x="1272" y="198" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1xmfps0_di" bpmnElement="SequenceFlow_1xmfps0">
+        <di:waypoint x="1238" y="216" />
+        <di:waypoint x="1272" y="216" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_0m6iv9x_di" bpmnElement="remind_consultant">
+        <dc:Bounds x="557" y="340" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="468" y="351" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0mbl7e5_di" bpmnElement="SequenceFlow_0mbl7e5">
+        <di:waypoint x="575" y="376" />
+        <di:waypoint x="575" y="436" />
+        <di:waypoint x="598" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_0h4zz38_di" bpmnElement="reminder_email_sent_consultant">
+        <dc:Bounds x="598" y="396" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1hrdxzp_di" bpmnElement="EndEvent_1hrdxzp">
+        <dc:Bounds x="703" y="465" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0po4qwz_di" bpmnElement="SequenceFlow_0po4qwz">
+        <di:waypoint x="698" y="436" />
+        <di:waypoint x="721" y="436" />
+        <di:waypoint x="721" y="465" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0b91hwi_di" bpmnElement="SequenceFlow_0b91hwi">
+        <di:waypoint x="903" y="105" />
+        <di:waypoint x="903" y="49" />
+        <di:waypoint x="972" y="49" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1rb4g2z_di" bpmnElement="EndEvent_1rb4g2z">
+        <dc:Bounds x="1122" y="31" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0l99c02_di" bpmnElement="SequenceFlow_0l99c02">
+        <di:waypoint x="1072" y="49" />
+        <di:waypoint x="1122" y="49" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_1xzi9zd_di" bpmnElement="BoundaryEvent_0sjweas">
+        <dc:Bounds x="885" y="105" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="788" y="116" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_1d16uxs_di" bpmnElement="remind_email_sent_customer">
+        <dc:Bounds x="972" y="9" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

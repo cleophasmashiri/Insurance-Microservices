@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+.bg-dark {
+    background-color: #007bff!important;
+    margin-bottom: 20px;
+}
+.form-group label {
+    min-width: 40%;
+}
+.btn-primary {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #007bff;
+    margin: 5px;
+}
+.btn-danger {
+    color: #dc3545;
+    background-color: #fff;
+    border-color: #dc3545;
+    margin: 5px;
+}

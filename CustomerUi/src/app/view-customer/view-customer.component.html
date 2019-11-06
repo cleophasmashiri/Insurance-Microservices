@@ -1,0 +1,55 @@
+<div class="container">
+    <h3 class="heading">View Customer</h3>
+    <div>
+        <div class="form-group">
+            <label>
+                <b>First name:</b> <span>{{customer.firstname}}</span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>Last name:</b> <span>{{customer.lastname}}</span>
+            </label>
+        </div> 
+        <div class="form-group">
+            <label>
+                <b>Gender:</b> {{customer.gender}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>Email:</b> {{customer.email}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>Phone Number:</b> {{customer.phoneNumber}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>Date of birth:</b> {{customer.birthday | date}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>Street Address:</b> {{customer.streetAddress}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>City:</b> {{customer.city}}
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <b>Postal Code:</b> {{customer.postalCode}}
+            </label>
+        </div>
+        <div class="form-group">
+            <button (click)="showPolicy()" class="btn btn-primary">View Policy</button>
+            <a [routerLink]="['/edit', customer.id]" class="btn btn-primary">Modify Customer</a>
+            <button [routerLink]="['']" type="submit" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+</div>

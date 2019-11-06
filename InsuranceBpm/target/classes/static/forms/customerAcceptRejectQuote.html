@@ -1,0 +1,31 @@
+<h3>Accept or Reject Life Quote</h3>
+<!--<script cam-script type="text/form-script">-->
+<!--camForm.on('submit', function(evt) {-->
+
+<!--var fileUpload = $('#passportDocument').get(0);-->
+
+<!--// prevent submit if user has not provided a file-->
+<!--evt.submitPrevented = (fileUpload.files.length == 0);-->
+
+<!--});-->
+<!--</script>-->
+<form role="form" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">Approve or Reject</label>
+        <div class="controls">
+            <input type="checkbox"
+                   cam-variable-name="customerAcceptQuote"
+                   cam-variable-type="Boolean" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Notes</label>
+        <div class="controls">
+            <input type="text" class="form-control"
+                   cam-variable-name="customerNotes"
+                   cam-variable-type="String"
+                   required
+            />
+        </div>
+    </div>
+</form>

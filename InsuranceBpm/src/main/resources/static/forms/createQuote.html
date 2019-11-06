@@ -1,0 +1,103 @@
+<h3>Submit Life Quote</h3>
+<!--<script cam-script type="text/form-script">-->
+    <!--camForm.on('submit', function(evt) {-->
+
+      <!--var fileUpload = $('#passportDocument').get(0);-->
+
+      <!--// prevent submit if user has not provided a file-->
+      <!--evt.submitPrevented = (fileUpload.files.length == 0);-->
+
+    <!--});-->
+  <!--</script>-->
+<form role="form" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">First Name</label>
+        <div class="controls">
+            <input type="text" class="form-control"
+                   cam-variable-name="firstName"
+                   cam-variable-type="String"
+                   required
+            />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Last Name</label>
+        <div class="controls">
+            <input type="text" class="form-control"
+                   cam-variable-name="lastName"
+                   cam-variable-type="String"
+                   required
+            />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Email Address</label>
+        <div class="controls">
+            <input type="text" class="form-control"
+                   cam-variable-name="emailAddress"
+                   cam-variable-type="String"
+                   required
+                   ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"
+            />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Date-Of-Birth</label>
+        <div class="controls">
+            <input type="Date" class="form-control"
+                   cam-variable-name="dob"
+                   cam-variable-type="String"
+                   required
+            />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Cell Phone</label>
+        <div class="controls">
+            <input type="text" class="form-control"
+                   cam-variable-name="cellPhone"
+                   cam-variable-type="String"
+                   required
+            />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Please enter a valid gross monthly income</label>
+        <div class="controls">
+            <input type="number" class="form-control"
+                   cam-variable-name="grossMonthlyIncome"
+                   cam-variable-type="Double"
+                   required
+            />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Highest level of education</label>
+        <div class="controls">
+            <select cam-variable-name="highestLevelOfEducation"
+                    cam-variable-type="String"
+                    class="form-control" required>
+                <option value="">--Please select--</option>
+                <option value="LessThanMatric">Less than Matric</option>
+                <option value="MatricOrGrade12">Matric or Grade 12</option>
+                <option value="Postgraduate">Postgraduate</option>
+                <option value="ThreeYearDiploma">Three Year Diploma</option>
+                <option value="FourYearDiploma">Four Year Diploma</option>
+                <option value="YearUndergrduateDegree">Three Year Undergraduate Degree</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Gender</label>
+        <div class="controls">
+            <select cam-variable-name="gender"
+                    cam-variable-type="String"
+                    class="form-control" required>
+                <option value="">--Please select--</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+    </div>
+</form>

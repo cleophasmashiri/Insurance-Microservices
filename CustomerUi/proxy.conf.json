@@ -1,0 +1,13 @@
+{
+    "/api/customers/*": {
+        "target": "https://localhost:5001",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },"/api/Users/*": {
+        "target": "https://localhost:5002",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
